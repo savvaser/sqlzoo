@@ -91,7 +91,16 @@ WHERE name='John Travolta'
 GROUP BY yr
 HAVING COUNT(title)>2;
 
--- 12. ist the film title and the leading actor for all of the films 'Julie Andrews' played in.Did you get "Little Miss Marker twice"?
+
+-- 12. List the film title and the leading actor for all of the films 'Julie Andrews' played in.Did you get "Little Miss Marker twice"?
+
+SELECT title, name FROM movie
+JOIN casting ON movie.id = movieid
+JOIN actor ON actor.id =actorid
+WHERE ord=1 AND movieid IN
+(SELECT movieid FROM casting 
+JOIN actor ON actor.id=actorid
+WHERE name='Julie Andrews')
 
 
 -- 13. Obtain a list, in alphabetical order, of actors who've had at least 30 starring roles.
